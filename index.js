@@ -7,7 +7,7 @@ const isIp = require('is-ip');
 
 const defaults = {
 	timeout: 5000,
-	onlyHttps: false
+	onlyHttps: false,
 };
 
 const dnsServers = [
@@ -17,19 +17,19 @@ const dnsServers = [
 				'208.67.222.222',
 				'208.67.220.220',
 				'208.67.222.220',
-				'208.67.220.222'
+				'208.67.220.222',
 			],
 			name: 'myip.opendns.com',
-			type: 'A'
+			type: 'A',
 		},
 		v6: {
 			servers: [
 				'2620:0:ccc::2',
-				'2620:0:ccd::2'
+				'2620:0:ccd::2',
 			],
 			name: 'myip.opendns.com',
-			type: 'AAAA'
-		}
+			type: 'AAAA',
+		},
 	},
 	{
 		v4: {
@@ -37,45 +37,45 @@ const dnsServers = [
 				'216.239.32.10',
 				'216.239.34.10',
 				'216.239.36.10',
-				'216.239.38.10'
+				'216.239.38.10',
 			],
 			name: 'o-o.myaddr.l.google.com',
 			type: 'TXT',
-			transform: ip => ip.replace(/"/g, '')
+			transform: ip => ip.replace(/"/g, ''),
 		},
 		v6: {
 			servers: [
 				'2001:4860:4802:32::a',
 				'2001:4860:4802:34::a',
 				'2001:4860:4802:36::a',
-				'2001:4860:4802:38::a'
+				'2001:4860:4802:38::a',
 			],
 			name: 'o-o.myaddr.l.google.com',
 			type: 'TXT',
-			transform: ip => ip.replace(/"/g, '')
-		}
-	}
+			transform: ip => ip.replace(/"/g, ''),
+		},
+	},
 ];
 
 const type = {
 	v4: {
 		dnsServers: dnsServers.map(({v4: {servers, ...question}}) => ({
-			servers, question
+			servers, question,
 		})),
 		httpsUrls: [
 			'https://icanhazip.com/',
-			'https://api.ipify.org/'
-		]
+			'https://api.ipify.org/',
+		],
 	},
 	v6: {
 		dnsServers: dnsServers.map(({v6: {servers, ...question}}) => ({
-			servers, question
+			servers, question,
 		})),
 		httpsUrls: [
 			'https://icanhazip.com/',
-			'https://api6.ipify.org/'
-		]
-	}
+			'https://api6.ipify.org/',
+		],
+	},
 };
 
 const queryDns = (version, options) => {
@@ -85,7 +85,7 @@ const queryDns = (version, options) => {
 		retries: 0,
 		maxQueries: 1,
 		socket: dgram.createSocket(version === 'v6' ? 'udp6' : 'udp4'),
-		timeout: options.timeout
+		timeout: options.timeout,
 	});
 
 	const socketQuery = promisify(socket.query.bind(socket));
@@ -146,7 +146,9 @@ const queryHttps = (version, options) => {
 				retry: {
 					limit: 0,
 				},
-				timeout: options.timeout,
+				timeout: {
+					request: options.timeout,
+				},
 			};
 
 			const urls = [].concat.apply(type[version].httpsUrls, options.fallbackUrls || []);
@@ -212,7 +214,7 @@ const queryAll = (version, options) => {
 module.exports.v4 = options => {
 	options = {
 		...defaults,
-		...options
+		...options,
 	};
 
 	if (!options.onlyHttps) {
@@ -229,7 +231,7 @@ module.exports.v4 = options => {
 module.exports.v6 = options => {
 	options = {
 		...defaults,
-		...options
+		...options,
 	};
 
 	if (!options.onlyHttps) {

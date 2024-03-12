@@ -4,6 +4,9 @@
 
 In Node.js, it queries the DNS records of OpenDNS, Google DNS, and HTTPS services to determine your IP address. In browsers, it uses the excellent [icanhaz](https://github.com/major/icanhaz) and [ipify](https://ipify.org) services through HTTPS.
 
+Fork of [sindresorhus/public-ip](https://github.com/sindresorhus/public-ip) from tag v4.0.4, last tag which supported requirejs.
+Updated dependencies to versions which still fully support requirejs.
+
 ## Install
 
 ```

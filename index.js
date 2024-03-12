@@ -142,9 +142,11 @@ const queryHttps = (version, options) => {
 	const promise = (async () => {
 		try {
 			const requestOptions = {
-				family: version === 'v6' ? 6 : 4,
-				retries: 0,
-				timeout: options.timeout
+				dnsLookupIpVersion: version === 'v6' ? 'ipv6' : 'ipv4',
+				retry: {
+					limit: 0,
+				},
+				timeout: options.timeout,
 			};
 
 			const urls = [].concat.apply(type[version].httpsUrls, options.fallbackUrls || []);

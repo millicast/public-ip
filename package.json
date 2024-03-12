@@ -1,6 +1,6 @@
 {
 	"name": "public-ip-requirejs",
-	"version": "4.1.0",
+	"version": "4.1.1",
 	"description": "Get your public IP address - very fast!",
 	"license": "MIT",
 	"repository": "millicast/public-ip",

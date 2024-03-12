@@ -1,15 +1,9 @@
 {
-	"name": "public-ip",
-	"version": "4.0.4",
+	"name": "public-ip-requirejs",
+	"version": "4.1.0",
 	"description": "Get your public IP address - very fast!",
 	"license": "MIT",
-	"repository": "sindresorhus/public-ip",
-	"funding": "https://github.com/sponsors/sindresorhus",
-	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
-	},
+	"repository": "millicast/public-ip",
 	"engines": {
 		"node": ">=8"
 	},
